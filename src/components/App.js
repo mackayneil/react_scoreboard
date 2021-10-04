@@ -28,7 +28,8 @@ class App extends Component {
         score: 0,
         id: 4
       }
-    ]
+    ],
+    highscore: 0   
   };
 
   
@@ -64,17 +65,42 @@ class App extends Component {
     });
   }
 
+
+
+
+  componentDidUpdate() {
+      this.handlePlayersHighscore()
+  } 
+
+  handlePlayersHighscore = () => {
+    let playerScores = [];  
+    let newHighscore;  
+    const getMax = (a, b) => Math.max(a, b);
+    this.state.players.forEach(function(e) {
+      playerScores.push(e.score)
+      newHighscore = playerScores.reduce(getMax)      
+    })
+
+    if (newHighscore !== this.state.highscore) {
+      this.setState({
+        highscore: newHighscore
+      })
+    }
+    
+  } 
+
+
   render() {
     return (
       <div className = "scoreboard">
         <Header 
-          title = "Scoreboard" 
           players = {this.state.players}
         />
   
         {/* Players list */}
         {this.state.players.map( (player, index) =>
           <Player 
+            highscore = {this.state.highscore}
             name = {player.name}
             score = {player.score}
             id = {player.id}
