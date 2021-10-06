@@ -1,7 +1,5 @@
 import React from "react";
-
-
-
+import PropTypes from 'prop-types';
 
 const HighscoreIcon = ({ score , highscore}) => {
     return (
@@ -10,6 +8,11 @@ const HighscoreIcon = ({ score , highscore}) => {
             <rect width="30.4986" height="3.07759" transform="translate(6.56987 31.5603)"/>
         </svg>
     ) 
+}
+
+HighscoreIcon.prototype = {
+    score: PropTypes.number,
+    highscore: PropTypes.number
 }
 
 
